@@ -1,0 +1,189 @@
+CREATE TABLE users (
+                         userID int NOT NULL,
+                         userName varchar(255) NOT NULL,
+                         lastName varchar(255) NOT NULL,
+                         firstName varchar(255) NOT NULL,
+                         country varchar(255),
+                         password varchar(255) NOT NULL,
+                         email varchar(255) NOT NULL,
+                         imageURL varchar(255) ,
+                         PRIMARY KEY (userName)
+);
+
+CREATE TABLE recipes (
+    recipeID int NOT NULL,
+    name varchar(255) NOT NULL ,
+    imageURL varchar(255) NOT NULL,
+    orders varchar(2000) NOT NULL,
+    time int,
+    numOfLikes int,
+    numOfDishes int,
+    vegan BIT,
+    glutenFree BIT,
+    PRIMARY KEY (recipeID)
+);
+
+create table recipeIngredients (
+    recipeID int NOT NULL,
+    ingredient varchar(255) NOT NULL,
+    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
+);
+
+create table userRecipeInfo(
+    recipeID int not null ,
+    userName varchar(255) not null ,
+    watched bit,
+    saved bit,
+    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID),
+    FOREIGN KEY (userName) REFERENCES users(userName)
+)
+
+create table RecipeCreator(
+    recipeID int NOT NULL,
+    userName varchar(255) NOT NULL,
+    PRIMARY KEY (recipeID),
+    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID),
+    FOREIGN KEY (userName) REFERENCES users(userName),
+);
+
+
+update userRecipesInfo SET  timeLastWatched='2012-06-18 10:34:09.000' where recipeID=489779 and userName='tzlilko'
+update userRecipesInfo SET  timeLastWatched='2012-06-18 10:34:09.000' where recipeID=589601 and userName='tzlilko'
+update userRecipesInfo SET  timeLastWatched='2012-06-18 10:34:09.000' where recipeID=489957 and userName='tzlilko'
+insert into userRecipesInfo (recipeID, userName, watched, saved) values (489779,'tzlilko',1,1,'2012-06-18 10:34:09.000')
+insert into userRecipesInfo (recipeID, userName, watched, saved) values (589601,'tzlilko',1,1,'2012-06-18 10:34:09.000')
+insert into userRecipesInfo (recipeID, userName, watched, saved) values (489957,'tzlilko',1,1,'2012-06-18 10:34:09.000')
+--------------------------------------------------Borcht-----------------------------------------------------------------------
+insert into familyRecipes values (
+                                     23,
+                                     'tzlilko',
+                                     'every day',
+                                     'Peel, grate and/or slice all vegetables, keeping sliced potatoes in cold water until ready to use.' +
+                                     'Heat a large soup pot (5 1/2 Qt or larger) over medium/high heat and add 4 Tbsp olive oil. Add grated beets and sauté 10 minutes, stirring occasionally until beets are softened.' +
+                                     'Add 4 cups chicken broth and 6 cups water. Add sliced potatoes and grated carrots then cook for 10-15 minutes or until easily pierced with a fork.' +
+                                     'While potatoes are cooking, place a large skillet over medium/high heat and add 2 Tbsp oil. Add chopped onion and celery. Saute stirring occasionally until softened and lightly golden (7-8 minutes). Add 4 Tbsp Ketchup and stir fry 30 seconds then transfer to the soup pot to continue cooking with the potatoes.' +
+                                     'When potatoes and carrots reach desired softness, add 1 can of beans, 2 bay leaves, 2-3 Tbsp white vinegar, 1 tsp salt, 1/4 tsp black pepper, 1 pressed garlic clove, and 3 Tbsp chopped dill. Simmer for an additional 10-15 minutes and add more salt and vinegar to taste. ' +
+                                     'Serve with vushka or garlic bread (optional) Enjoy!',
+                                     'https://img-global.cpcdn.com/recipes/646a81acef3d1896/640x640sq70/photo.jpg',
+                                    'Borscht (Beet Soup)',
+                                  'grandfather'
+                                 )
+insert into familyRecipesIngredients values (23,3,'medium beets peeled and grated')
+insert into familyRecipesIngredients values (23,6,'Tbsp olive oil divided')
+insert into familyRecipesIngredients values (23,4,'cups reduced sodium chicken broth + 6 cups water')
+insert into familyRecipesIngredients values (23,5,'medium potatoes peeled and sliced into bite-sized pieces')
+insert into familyRecipesIngredients values (23,2,'carrots peeled and grated')
+insert into familyRecipesIngredients values (23,2,'celery ribs trimmed and finely chopped')
+insert into familyRecipesIngredients values (23,1,'medium onion finely chopped')
+insert into familyRecipesIngredients values (23,4,'Tbsp ketchup')
+insert into familyRecipesIngredients values (23,1,'can white navy beans')
+insert into familyRecipesIngredients values (23,2,'bay leaves')
+insert into familyRecipesIngredients values (23,3,'Tbsp white vinegar')
+insert into familyRecipesIngredients values (23,1,'tsp salt')
+insert into familyRecipesIngredients values (23,0.25,'tsp black pepper freshly ground')
+insert into familyRecipesIngredients values (23,1,' large garlic clove pressed')
+insert into familyRecipesIngredients values (23,1,'Tbsp dill')
+---------------------------------------------------------Pelmeni----------------------------------------------------------------
+insert into familyRecipes values (
+                                     24,
+                                     'tzlilko',
+                                     'new year',
+                                     'Flour (1.5 cups) sift into a bowl, make a well, add water, milk, butter, add egg, salt and sugar, since the edges gradually knead the dough, to pass it on the table sprinkled with flour, adding more flour kneaded elastic elastic dough, cover it a bowl and let it rest 30-40 minutes, during which time the dough is necessary once "Move."'+
+                                     'Meat grinder twist on an onion (you can double), add minced salt and pepper (no more than adding spices), pour ice water, stuffing mix well.'+
+                                     'Dough for convenience divided into 3 parts, one part on a floured table roll into a thin layer (roll need quite thin, but not until transparent) glass squeeze circles of dough, put the stuffing in the middle of a. Fingers dipped in flour, well-knit stitches, pelmeni laid out on a floured tray. So blindly all pelmeni, trim and Move dough thinly roll out again, to use all the dough.'+
+                                     'Then the tray with pelmeni put in the freezer for 30 minutes, to be a little cold.'+
+                                     'You can then part pelmeni boil in salted water with the bay leaf, and some completely freeze shift in the bag and put into the freezer.',
+                                     'https://img-global.cpcdn.com/recipes/89fd755ff7178143/640x640sq70/photo.jpg',
+                                    'Pelmeni',
+                                  'grandmother(luiza)'
+                                 )
+
+insert into familyRecipesIngredients values (24,1.5,'cups flour')
+insert into familyRecipesIngredients values (24,1,'pc egg')
+insert into familyRecipesIngredients values (24,100,'ml water boiled slightly warm')
+insert into familyRecipesIngredients values (24,50,'ml milk')
+insert into familyRecipesIngredients values (24,1,'tbsp oil . tablespoon')
+insert into familyRecipesIngredients values (24,0.5,'tsp Salt')
+insert into familyRecipesIngredients values (24,1,'Pinch sugar')
+insert into familyRecipesIngredients values (24,300,'beef g')
+insert into familyRecipesIngredients values (24,300,'pork gr . (neck)')
+insert into familyRecipesIngredients values (24,300,'pork gr . (neck)')
+insert into familyRecipesIngredients values (24,1,'pc onion')
+insert into familyRecipesIngredients values (24,40,'ml ice water')
+
+-----------------------------------------------------------------Russian salad
+insert into familyRecipes values (
+                                     25,
+                                     'tzlilko',
+                                     'new year',
+                                    'Dice vegetables same size. Carrot., Potatoes.. beet.Green onions, pickles. Boiled hard the eggs.'+
+                                    'Boil potatoes and carrots together. Don’t overcook, all veggies have to be tender.10 mints or so. In Another pot, boil peas,'+
+                                    'Better if you cook vegetables night before.i kept them in the fridge, they are cold and dry.finally in a large mixing bowl mix everything, (beet, veggies, eggs, mayo)add salt mayo.',
+                                     'https://img-global.cpcdn.com/recipes/7ee0d9fda1449dc1/640x640sq70/photo.jpg',
+                                    'Russian Salad',
+                                  'grandmother(luiza)'
+                                 )
+
+insert into familyRecipesIngredients values (25,1.5,'cup frozen peas')
+insert into familyRecipesIngredients values (25,1.5,'potatoes')
+insert into familyRecipesIngredients values (25,1,'large carrot')
+insert into familyRecipesIngredients values (25,1,'Pickled cucumber (kosher)')
+insert into familyRecipesIngredients values (25,2,'boiled eggs')
+insert into familyRecipesIngredients values (25,0.25,'cup grilled beet (optional)')
+insert into familyRecipesIngredients values (25,0.5,'jar Light mayonnaise')
+insert into familyRecipesIngredients values (25,0.25,' cup green onions')
+
+CREATE TABLE personalRecipes (
+                       recipeID int NOT NULL,
+                       userName varchar(255) NOT NULL,
+                       title varchar(255) NOT NULL,
+                       imageURL varchar(255) ,
+                       orders varchar(2000) NOT NULL,
+                       duration int NOT NULL,
+                       Likes int ,
+                       numOfDishes int,
+                       vegan bit,
+                       glutenFree bit,
+                       vegetarian bit,
+                       PRIMARY KEY (recipeID),
+                       FOREIGN KEY (userName) REFERENCES users(userName)
+);
+
+CREATE TABLE personalRecipesIngredients(
+                                           recipeID int NOT NULL,
+                                           amount int,
+                                           ingredient varchar(255),
+                                           FOREIGN KEY (recipeID) REFERENCES personalRecipes(recipeID)
+
+);
+
+create table userRecipesInfo(
+                                recipeID int NOT NULL,
+                                userName varchar(255) NOT NULL,
+                                watched bit,
+                                saved bit,
+                                timeLastWatched datetime,
+                                FOREIGN KEY (recipeID) REFERENCES personalRecipes(recipeID),
+                                FOREIGN KEY (userName) REFERENCES users(userName),
+                                primary key (recipeID,userName)
+
+
+);
+
+create table familyRecipes(
+                              recipeID int NOT NULL,
+                              userName varchar(255) NOT NULL,
+                              eatingOccasions varchar(255),
+                              image varchar(255),
+                              name varchar(255),
+                              recipeOwner varchar(255),
+                              primary key (recipeID),
+                              FOREIGN KEY (userName) REFERENCES users(userName),
+);
+
+create table familyRecipesSteps(
+                                   recipeID int NOT NULL,
+                                   step int NOT NULL ,
+                                   instruction varchar(255),
+                                   primary key (recipeID,step)
+);

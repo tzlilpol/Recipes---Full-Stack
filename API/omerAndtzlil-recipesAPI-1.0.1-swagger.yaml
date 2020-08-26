@@ -1,0 +1,592 @@
+openapi: 3.0.0
+info:
+  version: "1.0.1"
+  title: 'recipes api'
+  description: 'a website about recipes'
+servers:
+- description: Our Server
+  url: http://localhost:3000
+tags:
+  - name: Auth
+    description: All authenticiation related routes
+  - name: Recipes
+  - name: Users
+  - name: Home
+
+  
+paths:
+  /:
+    get: #knows if the user is logged in before by cookie
+      tags:
+       - Home
+      description: home page. obtain 3 random recipes from our database. if a user is connected, obtain from db also the last 3 recipes he looked at 
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: unconnected user. succeful pull of the recipes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipePreview'
+        '201':
+          description: connected user. succeful pull of the recipes,.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipePreview'
+        '500':
+          description: host server unreachable at this time.
+
+  /recipe/{recipeId}:
+     get:
+      tags:
+        - Recipes
+      description: obtain full information avout the a specific recipe
+      parameters:
+        - in: path
+          name: recipeId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: succesfull pull of the recipe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullRecipe'
+        '400':
+          description: recipe dosent exist
+        '500':
+          description: host server unreachable at this time.
+  /recipe/search/query/{seachQuery}/amount/{num}:
+    get:
+      tags:
+        - "Recipes"
+      description: Search reciep in the spoonacular API, using a search query in the API.can filter resultes by Cuisine, diet, intolerance
+      parameters:
+        - in: path
+          name: seachQuery
+          required: true
+          schema:
+            type: string
+          description: The search query for searching in the API 
+        - in: path
+          name: num
+          required: true
+          schema:
+            type: integer
+            enum: [5,10,15]
+          description: Number of search results to retrieve
+        - in: query
+          name: cuisine
+          schema:
+           $ref: '#/components/schemas/Cuisine'
+        - in: query
+          name: diet
+          schema:
+           $ref: '#/components/schemas/Diet'
+        - in: query
+          name: intolerance
+          schema:
+           $ref: '#/components/schemas/Intolerance'
+      responses:
+        '200':
+          description: succefully retrieved search resultes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipePreview'
+        '204':
+          description: No recipes found for the search params
+  
+  /user/recipeInfo/{ids}:
+    get:
+      tags:
+      - Users
+      description: Get the user's app info on recipes by their ids
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: ids
+          description: Recipes ids array, for returning user data
+          required: true
+          schema:
+            type: array
+            items: 
+              type: integer
+              example: [23,65,89]
+      responses:
+        200:
+          description: object with the user info foreach of the sended ids
+          content:
+            application/json:
+              schema:
+                type: object
+                description: User's info on recipes. Returns a dictionary of ids as keys, and info as values
+                additionalProperties:
+                  type: object
+                  properties:
+                    watched:
+                      type: boolean
+                    saved:
+                      type: boolean
+                required:
+                  - watched
+                  - saved
+                example:
+                  23:
+                    watched: true
+                    saved: false
+        401:
+          description: unauthorized access. user not logged in
+  
+  /user/addRecipe:
+    post:
+      tags:
+        - "Users"
+      security:
+        - cookieAuth: []
+      summary: Adds a new recipe to a specific user (the creator of the recipe) account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              ##$ref: '#/components/schemas/fullRecipe'
+      responses:
+        '201':
+          description: recipe added succesfully
+        '401':
+          description: unauthorized access
+        '402':
+          description: not all required fields had been feeld
+        '500':
+          description: host server unreachable at this time.
+          
+  /user/private/recipe/:id/doubleNumOfDishes:
+     get:
+      tags:
+      - Users
+      description: double the specific private recipe's ingredients
+      security:
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Recipe id , for double the recipe ingrediants number.
+          required: true
+          schema:
+            type: integer
+            example: 31234
+      responses:
+        200:
+          description: recipe is doubled succefully. updated recipe returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullRecipe'
+        401:
+          description: unauthorized access. user not logged in
+        500:
+          description: server error
+    
+  /login:
+    post:
+      tags: 
+        - Auth
+      summary: "Logs in and returns the authentication  cookie"
+      description: A JSON object containing the username and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'    
+      responses:
+        200:
+          description: >
+            User successfully authenticated.
+            The session ID is returned in cookie named `session`.
+            you need to include this cookie in subsequent requests
+          headers: 
+            Set-Cookie:
+              schema: 
+                type: string
+                example: session=abcewre3423wr3432de12345;
+        400:
+          description: user id dosent exist
+        401:
+          description: unable to authenticate user
+  /logout:
+    get:
+      tags:
+        - Auth
+      security:
+        - cookieAuth: []
+      summary: "logging out a connected user"
+      description: log out
+      responses:
+        200:
+          description: user logged out succefully
+        401:
+          description: unauthorized
+        501:
+          description: server error
+  
+  /register:
+    post:
+      tags: 
+        - Auth
+      summary: "add new user to db"
+      description: add new user to db
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref:  '#/components/schemas/UserRegister' 
+      responses:
+        200:
+          description: Registration done successfully
+        405:
+          description: user name is taken
+        406:
+          description: There was a problem with one of the fields
+  
+  /user/myfavorite:
+    get:
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      summary: "Return user favorite recipes"
+      description: Return user favorite recipes
+      responses:
+        200:
+          description: recpies send successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/RecipePreview'
+        401:
+          description: unauthourized
+        501:
+          description: server error
+  
+  /user/private:
+    get:
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      summary: "Return user private recipes"
+      description: Return user private recipes
+      responses:
+        200:
+          description: recpies send successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/RecipePreview'
+        401:
+          description: unauthourized
+        501:
+          description: server error
+
+  /user/family:
+    get:
+      tags:
+        - "Users"
+      security:
+        - cookieAuth: []
+      summary: "Return user 3 or more family recipes"
+      description: Return user 3 or more family recipes
+      responses:
+        200:
+          description: recpies send successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FamilyRecipe' 
+                minItems: 3
+        401:
+          description: unauthourized
+        501:
+          description: server error
+
+  
+  /user/updateRecipeInfo/id/{recipeID}/saved/{saved}:
+    get:
+      tags:
+        - "Users"
+      security:
+        - cookieAuth: []
+      summary: "call to the server when user is saving a recipe to his favorites" 
+      description: "call to the server when user is saving a recipe to his favorites"
+      parameters:
+        - in: path
+          name: recipeID
+          required: true
+          schema:
+            type: string
+          description: recipe id
+        - in: path
+          name: saved
+          required: true
+          schema:
+            type: integer
+            enum: [0,1]
+          description: boolean choice wheteher to save ro recipe to the user favorite recipe list
+      responses:
+        200:
+          description: server get the time ans succesfully stores it into the user details
+        401:
+          description: unauthourized access
+        501:
+          description: server error
+
+  /user/updateRecipeInfo/id/{recipeID}/watched/{watched}:
+    get:
+        tags:
+          - "Users"
+        security:
+        - cookieAuth: []
+        summary: "return the time which the user watched a recipe to the server" 
+        description: "return the time which the user watched a recipe to the server" 
+        parameters:
+          - in: path
+            name: recipeID
+            required: true
+            schema:
+              type: string
+            description: recipe id
+          - in: path
+            name: watched
+            required: true
+            schema:
+              type: integer
+              enum: [0,1]
+            description: boolean choice wheteher to save ro recipe to the user favorite recipe list
+        responses:
+          200:
+            description: server get the user who watched a specific recipe 
+          401:
+            description: unauthourized access
+          501:
+            description: server error
+            
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey 
+      in: cookie
+      name: session #cookie name
+  schemas:
+    Cuisine:
+      type: string
+      enum: 
+        - African
+        - American
+        - British
+        - Cajun
+        - Caribbean
+        - Chinese
+        - Eastern European
+        - European
+        - French
+    Diet:
+      type: string
+      enum: 
+        - Gluten Free
+        - Ketogenic
+        - Vegetarian
+        - Vegan
+        - Pescetarian
+        - Paleo
+        - Primal
+        - Whole30
+    Intolerance:
+      type: string
+      enum: 
+        - Dairy
+        - Egg
+        - Gluten
+        - Grain
+        - Peanut
+        - Seafood
+        - Sesame
+        - Shellfish
+    UserLogin:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "danipp"
+        password:
+          type: string
+          example: "123456"
+    UserRegister:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "danipp"
+        firstname:
+          type: string
+          example: "dani"
+        lastname:
+          type: string
+          example: "fisherman"
+        country:
+          type: string
+          example: "Israel"
+        password:
+          type: string
+          example: "123456"              
+        confirmPassword:
+          type: string
+          example: "123465"
+        email:
+          type: string
+          example: "aaaa@gmail.com"
+        imageURL:
+          type: string
+          example: "http://dogs.com/image.jpg"
+    FamilyRecipe:
+      properties:
+        belongTo:
+          type: string
+          example: "hen"
+        whanCustomary:
+          type: string
+          example: "Rosh Hashanah"
+        ingredients:
+         type: string
+         example: "apple,lime..."
+        preparation:
+          type: string
+          example: "Mix the dough ingredients together..."
+        image:
+          type: string
+          example: "recipe1.img"
+    RecipePreview:
+        type: object
+        description: model represnts a preview of a specific recipe
+        properties:
+          id:
+            type: integer
+            description: The recipe identifier, returned for futher processing and actions on recieps
+          title:
+            type: string
+            description: The recipe title
+          duration:
+            type: integer
+            description: Recipe ready duration in minutes
+            example: 45
+            minimum: 0
+          numOfDishes:
+            type: integer
+            description: Recipe ready duration in minutes
+            example: 5
+            minimum: 0
+          likes:
+            type: integer
+            example: 120
+            minimum: 0
+          vegeterian:
+            type: boolean
+            example: true
+          vegan:
+            type: boolean
+            example: true
+          glutenFree:
+            type: boolean
+          image:
+            type: string
+            description: The recipe image url
+    FullRecipe:
+      type: object
+      description: model represnts a full data about a specific recipe
+      properties:
+        id:
+          type: integer
+          description: The recipe identifier, returned for futher processing and
+        title:
+          type: string
+          description: The recipe title
+        numberOfDishes:
+          type: integer
+          description: number of dishes
+        duration:
+          type: integer
+          description: Recipe ready duration in minutes
+          example: 120
+          minimum: 0
+        likes:
+          type: integer
+          example: 120
+          minimum: 0
+        vegeterian:
+          type: boolean
+          example: true
+        vegan:
+          type: boolean
+          example: true
+        glutenFree:
+          type: boolean
+          example: true
+        image:
+          type: string
+          description: The recipe image url
+        imageUrl:
+          type: string
+          description: The recipe image url
+        Ingredients:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+                example: banana
+              amount:
+                type: integer
+                example: 10
+        Instructions:
+          type: array
+          items:
+            properties:
+              number:
+                type: integer
+                example: 1
+              step:
+                type: string
+                example: hit the oven to a heat of 200 degrees and insert the cake inside for 20 minutes.
+      required:       
+        - title
+        - numberOfDishes
+        - image
+        - duration
+        - likes
+        - vegeterian
+        - vegan
+        - glutenFree
+        - watched
+        - inFavorites
+        - Ingredients
+        - Instructions

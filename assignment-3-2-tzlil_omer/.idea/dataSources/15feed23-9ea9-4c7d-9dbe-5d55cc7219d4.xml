@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="polyakovDB@polyakovserver.database.windows.net">
+  <database-model serializer="dbm" dbms="AZURE" family-id="AZURE" format-version="4.18">
+    <root id="1">
+      <ServerVersion>12.0.2000</ServerVersion>
+      <Dbms>AZURE</Dbms>
+    </root>
+    <database id="2" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+    </database>
+    <database id="3" parent="1" name="polyakovDB">
+      <ObjectId>5</ObjectId>
+      <Current>1</Current>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+      <Fingerprint>5.44001/4CB6795A-635B-4211-87E8-669017709FDB@polyakovserver</Fingerprint>
+    </database>
+    <schema id="4" parent="3" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="5" parent="3" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="6" parent="3" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="7" parent="3" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="8" parent="3" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="9" parent="3" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="10" parent="3" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="11" parent="3" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="12" parent="3" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="13" parent="3" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="14" parent="3" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2020-07-13.13:23:39.680</IntrospectionTimestamp>
+      <Current>1</Current>
+    </schema>
+    <schema id="15" parent="3" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="16" parent="3" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <table id="17" parent="14" name="familyRecipes">
+      <ObjectId>1749581271</ObjectId>
+      <CreatedTimestamp>2020-06-21.00:15:57.023</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:19:00.117</ModifiedTimestamp>
+    </table>
+    <table id="18" parent="14" name="familyRecipesIngredients">
+      <ObjectId>1861581670</ObjectId>
+      <CreatedTimestamp>2020-06-21.01:51:47.007</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.01:51:47.007</ModifiedTimestamp>
+    </table>
+    <table id="19" parent="14" name="familyRecipesSteps">
+      <ObjectId>1797581442</ObjectId>
+      <CreatedTimestamp>2020-06-21.00:23:42.397</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:23:42.397</ModifiedTimestamp>
+    </table>
+    <table id="20" parent="14" name="personalRecipes">
+      <ObjectId>1605580758</ObjectId>
+      <CreatedTimestamp>2020-06-21.00:00:51.123</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-13.13:23:37.310</ModifiedTimestamp>
+    </table>
+    <table id="21" parent="14" name="personalRecipesIngredients">
+      <ObjectId>114099447</ObjectId>
+      <CreatedTimestamp>2020-07-13.13:23:37.307</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-13.13:23:37.307</ModifiedTimestamp>
+    </table>
+    <table id="22" parent="14" name="personalRecipesInstructions">
+      <ObjectId>18099105</ObjectId>
+      <CreatedTimestamp>2020-07-12.15:53:07.180</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-12.15:53:07.180</ModifiedTimestamp>
+    </table>
+    <table id="23" parent="14" name="userRecipesInfo">
+      <ObjectId>1893581784</ObjectId>
+      <CreatedTimestamp>2020-06-21.02:22:44.127</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.02:22:44.127</ModifiedTimestamp>
+    </table>
+    <table id="24" parent="14" name="users">
+      <ObjectId>1573580644</ObjectId>
+      <CreatedTimestamp>2020-06-20.23:57:15.717</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.02:22:44.150</ModifiedTimestamp>
+    </table>
+    <column id="25" parent="17" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="17" name="userName">
+      <Position>2</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="17" name="eatingOccasions">
+      <Position>3</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <column id="28" parent="17" name="image">
+      <Position>5</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <column id="29" parent="17" name="name">
+      <Position>6</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <column id="30" parent="17" name="recipeOwner">
+      <Position>7</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <index id="31" parent="17" name="PK__familyRe__C114EE6328628353">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="32" parent="17" name="PK__familyRe__C114EE6328628353">
+      <ObjectId>1765581328</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.00:15:57.027</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:15:57.027</ModifiedTimestamp>
+      <ColNames>recipeID</ColNames>
+      <UnderlyingIndexName>PK__familyRe__C114EE6328628353</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="33" parent="17" name="FK__familyRec__userN__6A30C649">
+      <ObjectId>1781581385</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.00:15:57.027</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:15:57.027</ModifiedTimestamp>
+      <ColNames>userName</ColNames>
+      <RefTableId>1573580644</RefTableId>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>PK__users__66DCF95D7EC093ED</RefKeyName>
+      <RefColNames>userName</RefColNames>
+    </foreign-key>
+    <column id="34" parent="18" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="18" name="amount">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="18" name="ingredient">
+      <Position>3</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="18" name="PK__familyRe__4457CEBA73BA92A1">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID
+ingredient</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="18" name="PK__familyRe__4457CEBA73BA92A1">
+      <ObjectId>1877581727</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.01:51:47.010</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.01:51:47.010</ModifiedTimestamp>
+      <ColNames>recipeID
+ingredient</ColNames>
+      <UnderlyingIndexName>PK__familyRe__4457CEBA73BA92A1</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="39" parent="19" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="19" name="step">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="19" name="instruction">
+      <Position>3</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <index id="42" parent="19" name="PK__familyRe__D2065C05AFF729C6">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID
+step</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="43" parent="19" name="PK__familyRe__D2065C05AFF729C6">
+      <ObjectId>1813581499</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.00:23:42.400</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:23:42.400</ModifiedTimestamp>
+      <ColNames>recipeID
+step</ColNames>
+      <UnderlyingIndexName>PK__familyRe__D2065C05AFF729C6</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="44" parent="20" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="20" name="userName">
+      <Position>2</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="20" name="title">
+      <Position>3</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="20" name="imageURL">
+      <Position>4</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <column id="48" parent="20" name="duration">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="20" name="Likes">
+      <Position>7</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="50" parent="20" name="numOfDishes">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="51" parent="20" name="vegan">
+      <Position>9</Position>
+      <DataType>bit|0s</DataType>
+    </column>
+    <column id="52" parent="20" name="glutenFree">
+      <Position>10</Position>
+      <DataType>bit|0s</DataType>
+    </column>
+    <column id="53" parent="20" name="vegetarian">
+      <Position>11</Position>
+      <DataType>bit|0s</DataType>
+    </column>
+    <index id="54" parent="20" name="PK__personal__C114EE632E048920">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="55" parent="20" name="PK__personal__C114EE632E048920">
+      <ObjectId>1621580815</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.00:00:51.123</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:00:51.123</ModifiedTimestamp>
+      <ColNames>recipeID</ColNames>
+      <UnderlyingIndexName>PK__personal__C114EE632E048920</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="56" parent="20" name="FK__personalR__userN__619B8048">
+      <ObjectId>1637580872</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.00:00:51.123</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.00:00:51.123</ModifiedTimestamp>
+      <ColNames>userName</ColNames>
+      <RefTableId>1573580644</RefTableId>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>PK__users__66DCF95D7EC093ED</RefKeyName>
+      <RefColNames>userName</RefColNames>
+    </foreign-key>
+    <column id="57" parent="21" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="21" name="amount">
+      <Position>2</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="59" parent="21" name="ingredient">
+      <Position>3</Position>
+      <DataType>varchar(200 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="60" parent="21" name="PK__personal__4457CEBA6E73D3E3">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID
+ingredient</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="61" parent="21" name="PK__personal__4457CEBA6E73D3E3">
+      <ObjectId>130099504</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-07-13.13:23:37.310</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-13.13:23:37.310</ModifiedTimestamp>
+      <ColNames>recipeID
+ingredient</ColNames>
+      <UnderlyingIndexName>PK__personal__4457CEBA6E73D3E3</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="62" parent="21" name="FK__personalR__recip__08B54D69">
+      <ObjectId>146099561</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-07-13.13:23:37.310</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-13.13:23:37.310</ModifiedTimestamp>
+      <ColNames>recipeID</ColNames>
+      <RefTableId>1605580758</RefTableId>
+      <RefTableName>personalRecipes</RefTableName>
+      <RefKeyName>PK__personal__C114EE632E048920</RefKeyName>
+      <RefColNames>recipeID</RefColNames>
+    </foreign-key>
+    <column id="63" parent="22" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="22" name="step">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="22" name="instruction">
+      <Position>3</Position>
+      <DataType>varchar(300 char)|0s</DataType>
+    </column>
+    <index id="66" parent="22" name="PK__personal__D2065C05F4F440FA">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID
+step</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="67" parent="22" name="PK__personal__D2065C05F4F440FA">
+      <ObjectId>34099162</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-07-12.15:53:07.390</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-12.15:53:07.390</ModifiedTimestamp>
+      <ColNames>recipeID
+step</ColNames>
+      <UnderlyingIndexName>PK__personal__D2065C05F4F440FA</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="68" parent="22" name="FK__personalR__recip__02FC7413">
+      <ObjectId>50099219</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-07-12.15:53:07.390</CreatedTimestamp>
+      <ModifiedTimestamp>2020-07-12.15:53:07.390</ModifiedTimestamp>
+      <ColNames>recipeID</ColNames>
+      <RefTableId>1605580758</RefTableId>
+      <RefTableName>personalRecipes</RefTableName>
+      <RefKeyName>PK__personal__C114EE632E048920</RefKeyName>
+      <RefColNames>recipeID</RefColNames>
+    </foreign-key>
+    <column id="69" parent="23" name="recipeID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="23" name="userName">
+      <Position>2</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="23" name="watched">
+      <Position>3</Position>
+      <DataType>bit|0s</DataType>
+    </column>
+    <column id="72" parent="23" name="saved">
+      <Position>4</Position>
+      <DataType>bit|0s</DataType>
+    </column>
+    <column id="73" parent="23" name="timeLastWatched">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="74" parent="23" name="PK__userReci__077921F695911C5B">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recipeID
+userName</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="75" parent="23" name="PK__userReci__077921F695911C5B">
+      <ObjectId>1909581841</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.02:22:44.150</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.02:22:44.150</ModifiedTimestamp>
+      <ColNames>recipeID
+userName</ColNames>
+      <UnderlyingIndexName>PK__userReci__077921F695911C5B</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="76" parent="23" name="FK__userRecip__userN__72C60C4A">
+      <ObjectId>1925581898</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-21.02:22:44.150</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-21.02:22:44.150</ModifiedTimestamp>
+      <ColNames>userName</ColNames>
+      <RefTableId>1573580644</RefTableId>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>PK__users__66DCF95D7EC093ED</RefKeyName>
+      <RefColNames>userName</RefColNames>
+    </foreign-key>
+    <column id="77" parent="24" name="userID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="24" name="userName">
+      <Position>2</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="24" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="80" parent="24" name="lastName">
+      <Position>4</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="81" parent="24" name="firstName">
+      <Position>5</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="82" parent="24" name="country">
+      <Position>6</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <column id="83" parent="24" name="email">
+      <Position>7</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="24" name="imageURL">
+      <Position>8</Position>
+      <DataType>varchar(255 char)|0s</DataType>
+    </column>
+    <index id="85" parent="24" name="PK__users__66DCF95D7EC093ED">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>userName</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="86" parent="24" name="PK__users__66DCF95D7EC093ED">
+      <ObjectId>1589580701</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2020-06-20.23:57:15.720</CreatedTimestamp>
+      <ModifiedTimestamp>2020-06-20.23:57:15.720</ModifiedTimestamp>
+      <ColNames>userName</ColNames>
+      <UnderlyingIndexName>PK__users__66DCF95D7EC093ED</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
